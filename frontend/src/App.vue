@@ -1,4 +1,4 @@
-<script setup lang=ts>
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 
 const name = ref('Vue 3 with TypeScript');
@@ -12,9 +12,9 @@ const todos = ref<Todo[]>([
   { id: 3, title: 'Call Alice', completed: false },
 ]);
 
-const kensuu = computed() => {
+const kensuu = computed(() => {
   return todos.value.filter(todo => !todo.completed).length;
-};
+});
 </script>
 
 <template>

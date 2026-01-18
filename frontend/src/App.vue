@@ -19,12 +19,13 @@ const todoStore = useTodoStore()
           <span :style="{ textDecoration: todo.completed ? 'line-through' : 'none' }">
             {{ todo.title }}
           </span>
-          <button @click="todoStore.removeTodo(todo.id)">Remove</button>
+          <button @click="todoStore.removeTodo(todo.id)">
+            Remove
+          </button>
         </li>
       </ul>
     </section>
 
-    <!-- ★ ここで AddTodo を使う -->
     <AddTodo />
   </div>
 </template>

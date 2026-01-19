@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import { useTodoStore } from './stores/todoStore'
-import AddTodo from './components/AddTodo.vue'
 
-const todoStore = useTodoStore()
+import { RouterView, RouterLink } from 'vue-router'; // <-- RouterViewとRouterLinkをインポートする
+
 </script>
 
 <template>
   <div id="app">
-    <section class="todo-app">
-      <h2>Todos</h2>
-      <ul>
-        <li
-          v-for="todo in todoStore.todos"
-          :key="todo.id"
-          style="display:flex; align-items:center; gap:0.5rem; margin:0.25rem 0;"
-        >
-          <input type="checkbox" v-model="todo.completed" />
-          <span :style="{ textDecoration: todo.completed ? 'line-through' : 'none' }">
-            {{ todo.title }}
-          </span>
-          <button @click="todoStore.removeTodo(todo.id)">
-            Remove
-          </button>
-        </li>
-      </ul>
-    </section>
+    <header> <!-- ヘッダーエリア -->
+      <h1>Todo App</h1>
+    </header>
 
-    <AddTodo />
+    <main id="main-content"> <!-- メインコンテンツ -->
+      <router-view />
+    </main>
+    <footer> <!-- フッターエリア -->
+      <ul>
+        <li><router-link to="/todos">Todo List</router-link></li>
+        <li><router-link to="/about">About</router-link></li>
+      </ul>
+    </footer>
   </div>
 </template>
+
+<style scoped>
+  #main-content { padding: 1rem; border-style: solid; border-width: 2px; }
+</style>

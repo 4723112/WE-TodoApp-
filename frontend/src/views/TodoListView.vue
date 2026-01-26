@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import { useTodosStore } from '../stores/todoStore';
+    import { useTodoStore } from '../stores/todoStore';
     import AddTodo from '../components/AddTodo.vue';
-    const todoStore = useTodosStore();
+    const todoStore = useTodoStore();
 </script>
 
 <template>

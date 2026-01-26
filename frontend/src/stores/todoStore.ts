@@ -9,23 +9,25 @@ interface Todo {
 
 export const useTodoStore = defineStore('todos', () => {
     let serialId = 4 //next id
-    const todos = ref<Todo[]>([
-        { id: 1, title: 'Buy groceries', completed: false },
-        { id: 2, title: 'Write report', completed: true },
-        { id: 3, title: 'Call Alice', completed: false },
-    ])
+    const todos = ref<Todo[]>([])
 
-    const addTodo = (title: string) => {
-        const newTodo: Todo = {
-            id: serialId++,
-            title: title,
-            completed: false,
-        }
+    const addTodo = async (title: string) => {
+        const response = await fetch('http://127.0.0.1:8001/todos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title })
+        })
+        const newTodo: Todo = await response.json()
         todos.value.push(newTodo)
     }
 
-    const removeTodo = (id: number) => {
+    const removeTodo = async (id: number) => {
+        await fetch(`http://127.0.0.1:8001/todos/${id}`, {
+            method: 'DELETE'
+        })
         todos.value = todos.value.filter((todo) => todo.id !== id)
     }
-    return { todos, addTodo,removeTodo }
+    return { todos, addTodo, removeTodo }
 })
